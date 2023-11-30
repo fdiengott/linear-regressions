@@ -31,8 +31,8 @@ def computeGradient(x, y, w, b):
         error = (np.dot(x[i], w) + b) - y[i]
 
         for j in range(n):
-            derivativeCostW = derivativeCostW + error * x[i, j]
-        derivativeCostB = derivativeCostB + error
+            derivativeCostW += error * x[i, j]
+        derivativeCostB += error
 
     return derivativeCostW, derivativeCostB
 
@@ -43,8 +43,8 @@ def gradientDescent(x, y, w_init, b_init, alpha, numIterations):
 
     for i in range(numIterations):
         derivativeCostW, derivativeCostB = computeGradient(x, y, w, b)
-        w = w - alpha / m * derivativeCostW
-        b = b - alpha / m * derivativeCostB
+        w -= alpha / m * derivativeCostW
+        b -= alpha / m * derivativeCostB
 
         if i% math.ceil(numIterations / 10) == 0:
             print(getCost(x, y, w, b))
